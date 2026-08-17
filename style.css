@@ -25,8 +25,9 @@
   --shadow-sm:   0 2px 12px rgba(0,0,0,.08);
   --shadow-md:   0 8px 32px rgba(0,0,0,.1);
   --shadow-lg:   0 20px 60px rgba(0,0,0,.12);
-  --f-display:   'Anton', sans-serif;
+  --f-display:   'Plus Jakarta Sans', sans-serif;
   --f-body:      'Inter', sans-serif;
+  --f-accent:    'Playfair Display', Georgia, serif;
   --radius:      12px;
   --radius-lg:   20px;
 }
@@ -134,14 +135,22 @@ body {
 .sec-head.center { text-align: center; }
 .sec-title {
   font-family: var(--f-display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 400;
-  letter-spacing: .03em;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
   text-transform: uppercase;
   color: var(--black-mid);
-  line-height: 1.05;
+  line-height: 1.15;
 }
-.sec-title span { color: var(--blue); }
+.sec-title span,
+.sec-title em {
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: none;
+  color: var(--blue);
+  letter-spacing: 0;
+}
 .sec-desc {
   font-size: 1rem;
   color: var(--gray);
@@ -167,10 +176,11 @@ body {
 }
 .internal-title {
   font-family: var(--f-display);
-  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 800;
   color: var(--white);
   text-transform: uppercase;
-  letter-spacing: .02em;
+  letter-spacing: -.02em;
   margin-bottom: 12px;
 }
 .internal-sub {
@@ -639,15 +649,23 @@ body {
 
 .slide-title {
   font-family: var(--f-display);
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
-  font-weight: 400;
-  line-height: .95;
-  letter-spacing: .02em;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 16px;
 }
-.slide-title span { color: var(--blue); }
+.slide-title span,
+.slide-title em {
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: none;
+  color: var(--blue);
+  letter-spacing: 0;
+}
 
 .slide-sub {
   font-size: clamp(1rem, 2vw, 1.25rem);
@@ -783,21 +801,23 @@ body {
 .break-section .kicker { color: var(--blue-light); }
 .break-title {
   font-family: var(--f-display);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: .03em;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.02em;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 18px;
 }
 .break-title em,
 .break-title span {
-  font-family: inherit;
-  font-style: normal;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 600;
+  text-transform: none;
   color: var(--blue);
-  text-transform: uppercase;
-  font-size: inherit;
+  letter-spacing: 0;
+  font-size: 1.08em;
 }
 .break-sub {
   font-size: 1rem;
