@@ -785,19 +785,19 @@ body {
   font-family: var(--f-display);
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: .03em;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 18px;
 }
-.break-title em {
-  font-family: var(--f-body);
-  font-style: italic;
+.break-title em,
+.break-title span {
+  font-family: inherit;
+  font-style: normal;
   color: var(--blue);
-  font-weight: 800;
-  text-transform: none;
-  font-size: .85em;
+  text-transform: uppercase;
+  font-size: inherit;
 }
 .break-sub {
   font-size: 1rem;
