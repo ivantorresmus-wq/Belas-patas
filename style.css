@@ -221,6 +221,28 @@ body {
 }
 .hero-map svg { width: 100%; height: 100%; }
 
+/* ── VIDEO SECTION ── */
+.video-section {
+  padding: 80px 24px;
+  background: var(--navy);
+  border-bottom: 1px solid var(--border);
+}
+.video-wrapper {
+  max-width: 360px;
+  margin: 0 auto;
+  aspect-ratio: 9/16;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  border: 1px solid var(--border-blue);
+}
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 /* ── BREAK ── */
 .break { background: var(--navy); padding: 100px 56px; text-align: center; position: relative; overflow: hidden; }
 .break::after {
