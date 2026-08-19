@@ -93,21 +93,61 @@
     </div>
   </section>
 
-  <!-- ===== VIDEO DA ESCOLA ===== -->
-  <section class="video-section">
-    <!-- DECORATIVE COMPOSITION BACKGROUND LAYER -->
-    <div class="video-bg-layer" aria-hidden="true">
-      <div class="video-bg-img video-bg-left"></div>
-      <div class="video-bg-img video-bg-right"></div>
-      <div class="video-bg-overlay"></div>
-      <img src="assets/logo-header.png" alt="" class="video-bg-watermark" />
+  <!-- ===== VIDEO + GALERIA CINEMATOGRÁFICA ===== -->
+  <section class="video-section" id="instalacoes">
+    <div class="cinema-layout">
+
+      <!-- LEFT GALLERY PANEL -->
+      <div class="cinema-side cinema-left" aria-label="Galeria esquerda">
+        <div class="cinema-depth-img">
+          <img src="assets/galeria-02.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="cinema-gallery" data-gallery="left">
+          <img class="cinema-slide active" src="assets/galeria-01.jpg" alt="Tosa profissional na Belas Patas" loading="lazy" />
+          <img class="cinema-slide" src="assets/banner01.jpg" alt="Prática de banho na Belas Patas" loading="lazy" />
+          <img class="cinema-slide" src="assets/banner04.jpg" alt="Ambiente de aula Belas Patas" loading="lazy" />
+        </div>
+        <div class="cinema-overlay"></div>
+        <div class="cinema-fade cinema-fade-right"></div>
+        <div class="cinema-fade cinema-fade-bottom"></div>
+        <div class="cinema-fade cinema-fade-top"></div>
+      </div>
+
+      <!-- CENTER VIDEO (FIXED — NEVER MOVES) -->
+      <div class="cinema-center">
+        <span class="kicker fade in">Conheça Nossas Instalações</span>
+        <h2 class="sec-title fade d1 in" style="margin-bottom: 24px;">Veja como é estudar na <span>Belas Patas</span></h2>
+        <div class="video-wrapper fade d2 in">
+          <iframe src="https://www.youtube.com/embed/GKaz-VXW9MI" title="Apresentação Escola Belas Patas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- RIGHT GALLERY PANEL -->
+      <div class="cinema-side cinema-right" aria-label="Galeria direita">
+        <div class="cinema-depth-img">
+          <img src="assets/galeria-01.jpg" alt="" loading="lazy" />
+        </div>
+        <div class="cinema-gallery" data-gallery="right">
+          <img class="cinema-slide active" src="assets/galeria-03.jpg" alt="Banho profissional na Belas Patas" loading="lazy" />
+          <img class="cinema-slide" src="assets/galeria-02.jpg" alt="Cuidado com o pet na Belas Patas" loading="lazy" />
+          <img class="cinema-slide" src="assets/banner03.jpg" alt="Estrutura Belas Patas" loading="lazy" />
+        </div>
+        <div class="cinema-overlay"></div>
+        <div class="cinema-fade cinema-fade-left"></div>
+        <div class="cinema-fade cinema-fade-bottom"></div>
+        <div class="cinema-fade cinema-fade-top"></div>
+      </div>
+
     </div>
 
-    <div class="container text-center relative" style="position: relative; z-index: 2;">
-      <span class="kicker fade in">Conheça Nossas Instalações</span>
-      <h2 class="sec-title fade d1 in" style="margin-bottom: 24px;">Veja como é estudar na <span>Belas Patas</span></h2>
-      <div class="video-wrapper fade d2 in">
-        <iframe src="https://www.youtube.com/embed/GKaz-VXW9MI" title="Apresentação Escola Belas Patas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <!-- MOBILE GALLERY (below video) -->
+    <div class="cinema-mobile-gallery fade d3 in">
+      <div class="cinema-mobile-track" data-gallery="mobile">
+        <img class="cinema-mobile-thumb active" src="assets/galeria-01.jpg" alt="Tosa profissional" loading="lazy" />
+        <img class="cinema-mobile-thumb" src="assets/galeria-02.jpg" alt="Banho profissional" loading="lazy" />
+        <img class="cinema-mobile-thumb" src="assets/galeria-03.jpg" alt="Cuidado pet" loading="lazy" />
+        <img class="cinema-mobile-thumb" src="assets/banner01.jpg" alt="Prática" loading="lazy" />
+        <img class="cinema-mobile-thumb" src="assets/banner04.jpg" alt="Ambiente" loading="lazy" />
       </div>
     </div>
   </section>
@@ -420,6 +460,45 @@
       $s.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
     }
     tick(); setInterval(tick, 1000);
+
+    // CINEMA GALLERY — CROSSFADE ROTATION
+    (function initCinemaGallery() {
+      const INTERVAL = 6000; // 6 seconds between transitions
+      const STAGGER  = 3000; // right panel is staggered 3s after left
+
+      function rotateGallery(container) {
+        const slides = container.querySelectorAll('.cinema-slide');
+        if (slides.length < 2) return;
+        const current = container.querySelector('.cinema-slide.active');
+        const idx = Array.from(slides).indexOf(current);
+        const next = slides[(idx + 1) % slides.length];
+        current.classList.remove('active');
+        next.classList.add('active');
+      }
+
+      // Desktop galleries
+      const leftGal  = document.querySelector('[data-gallery="left"]');
+      const rightGal = document.querySelector('[data-gallery="right"]');
+
+      if (leftGal)  setInterval(() => rotateGallery(leftGal), INTERVAL);
+      if (rightGal) setTimeout(() => {
+        rotateGallery(rightGal);
+        setInterval(() => rotateGallery(rightGal), INTERVAL);
+      }, STAGGER);
+
+      // Mobile gallery — auto-scroll
+      const mobileTrack = document.querySelector('.cinema-mobile-track');
+      if (mobileTrack) {
+        const thumbs = mobileTrack.querySelectorAll('.cinema-mobile-thumb');
+        let mIdx = 0;
+        setInterval(() => {
+          thumbs[mIdx].classList.remove('active');
+          mIdx = (mIdx + 1) % thumbs.length;
+          thumbs[mIdx].classList.add('active');
+          thumbs[mIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }, 4000);
+      }
+    })();
 
     // MODAL LOGIC
     function openModal() {
